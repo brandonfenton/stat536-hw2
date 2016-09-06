@@ -12,6 +12,12 @@ date: "Due Friday 9/9 at 6 PM"
 knitr::opts_chunk$set(echo = TRUE, show.signif.stars=FALSE)
 
 require(pander)
+
+
+panderOptions('round', 5)
+panderOptions('digits', 5)
+panderOptions('keep.trailing.zeros', TRUE)
+
 require(zoo)
 require(dplyr)
 require(car)
@@ -35,7 +41,8 @@ bozetmp$MONTH <- as.factor(bozetmp$MONTH)
 
 bzt.fit <- lm(MMXT~ FYEAR + MONTH, data=bozetmp)
 
-pander(bzt.fit, move.intercept=FALSE)
+pander(bzt.fit)
+
 ```
 
 2) What is the model for an observation in a January? July? Simplify the full model for each specific month to just provide a function of `Year`. 
@@ -62,6 +69,9 @@ require(multcomp)
 
 
 Tukey_results<-glht(model = bzt.fit, linfct=mcp(MONTH="Tukey"))
+
+
+# pander(confint(Tukey_results)$confint)
 
 confint(Tukey_results)
 ```
