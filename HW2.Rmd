@@ -25,14 +25,14 @@ Either use my code or your code to generate a `Year` variable that includes the 
 ```{r p1, echo=F, comment=NA, message=F, warning=F, cache=T}
 bozetmp$DATE <- as.yearmon(as.character(bozetmp$DATE), "%Y%m")
 
-bozetmp$MONTH <- as.POSIXlt(bozetmp$DATE)$mon + 1
+bozetmp$MONTH <- as.POSIXlt(bozetmp$DATE)$mon
 bozetmp$YEAR <- as.POSIXlt(bozetmp$DATE)$year + 1900
 
 bozetmp$FYEAR <- bozetmp$YEAR + bozetmp$MONTH/12
 
 bozetmp$MONTH <- as.factor(bozetmp$MONTH)
 
-bzt.fit <- lm(MMXT~ YEAR + MONTH, data=bozetmp)
+bzt.fit <- lm(MMXT~ FYEAR + MONTH, data=bozetmp)
 
 pander(bzt.fit, move.intercept=FALSE)
 ```
@@ -42,13 +42,13 @@ pander(bzt.fit, move.intercept=FALSE)
 3) Has the mean temperature changed differently in different months? Load the `car` package and make a plot using something like `scatterplot(MMXT~Year|Month,data=rawd1,legend.plot=T,smoother=F)`. Discuss the results in the plot.
 
 ```{r p3, echo=F, comment=NA, message=F, warning=F, cache=T}
-scatterplot(MMXT~YEAR|MONTH,data=bozetmp,legend.plot=T,smoother=F)
+scatterplot(MMXT~FYEAR|MONTH,data=bozetmp,legend.plot=T,smoother=F)
 ```
 
 4) Explore the same research question as in #3 by fitting a model with a `Year` by `Month` interaction (include main `effects` too). Generate and report an F-test for the interaction in the model using either `anova` or `Anova` from the `car` package. Write out a one-sentence conclusion that summarizes the results of the test including information on the distribution of the test statistic under the null hypothesis in that sentence.
 
 ```{r p4, echo=F, comment=NA, message=F, warning=F, cache=T}
-bzt.fit2 <- lm(MMXT~ YEAR + MONTH : YEAR:MONTH, data=bozetmp)
+bzt.fit2 <- lm(MMXT~ FYEAR + MONTH : YEAR:MONTH, data=bozetmp)
 
 pander(anova(bzt.fit2))
 ```
@@ -59,27 +59,25 @@ pander(anova(bzt.fit2))
 
 require(multcomp)
 
-Tukey_results<-glht(bzt.fit,linfct=mcp(MONTH="Tukey"))
 
-summary(Tukey_results)
+Tukey_results<-glht(model = bzt.fit, linfct=mcp(MONTH="Tukey"))
 
 confint(Tukey_results)
 ```
-
 
   You can also plot the results but with so many comparisons, the plot is not very useful. Based on these results, what can you say about evidence for differences in the months after controlling for the linear year trend? A fairly simple pattern should arise in the results. I find it useful to switch to saying differences were or were not "detected" when dealing with a large suite of Tukey's results. 
 
 6) One other issue that wasn't obvious in either the initial plots or in the model diagnostics is whether the linear trend really is a good description of the changes over time. There are a couple of ways to add polynomial terms to linear models. The simplest is just to create a squared version of the variable and include it as an additional variable. We'll see that this isn't an optimal choice in the next homework, but let's start this way for now. Once you are considering incorporating polynomials, we need to consider some sort of model refinement to decide on the polynomial order (linear, quadratic, cubic, quartic, etc.) to use. One technique is to sequentially add higher order versions of the variable to the lower order (linear, quadratic, etc.) versions of it and stop when the highest order term has a "large p-value" and drop back to the next lower order model that has the highest order term having a small p-value (checking diagnostics to make sure nothing really high order was missed). Employ this approach, starting with adding a quadratic `Year` variable to the `Year+Month` model. Report the test for the quadratic component (with distribution, test statistic, and p-value) and interpret this result, remembering that t-tests are conditional on other stuff in the model. 
 
 ```{r p6, echo=F, comment=NA, message=F, warning=F, cache=T}
-bzt.fit3 <- lm(MMXT~ YEAR + MONTH + YEAR^2, data=bozetmp)
+bzt.fit3 <- lm(MMXT~ FYEAR + MONTH + I(YEAR^2), data=bozetmp)
 pander(bzt.fit3)
 ```
 
 7) For the model with the linear and quadratic `Year` components and an additive `Month`, produce the 2x2 diagnostic plots from `plot(model)` as in HW 1. This time, discuss the top left panel (`Residuals vs Fitted`). Discuss what you can generally assess in this plot and then discuss the specific results for this model. 
 
 ```{r p7, echo=F, comment=NA, message=F, warning=F, cache=T}
-
+plot(bzt.fit3)
 ```
 
 
