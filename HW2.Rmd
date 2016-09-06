@@ -9,6 +9,12 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE, show.signif.stars=FALSE)
 
 require(pander)
+
+
+panderOptions('round', 5)
+panderOptions('digits', 5)
+panderOptions('keep.trailing.zeros', TRUE)
+
 require(zoo)
 require(dplyr)
 require(car)
@@ -32,7 +38,8 @@ bozetmp$MONTH <- as.factor(bozetmp$MONTH)
 
 bzt.fit <- lm(MMXT~ FYEAR + MONTH, data=bozetmp)
 
-pander(bzt.fit, move.intercept=FALSE)
+pander(bzt.fit)
+
 ```
 
 2) _What is the model for an observation in a January? July? Simplify the full model for each specific month to just provide a function of `Year`._
@@ -64,6 +71,9 @@ require(multcomp)
 
 Tukey_results<-glht(model = bzt.fit, linfct=mcp(MONTH="Tukey"))
 
+
+# pander(confint(Tukey_results)$confint)
+
 confint(Tukey_results)
 ```
 
@@ -82,6 +92,7 @@ pander(bzt.fit3)
 par(mfrow=c(2,2))
 plot(bzt.fit3)
 ```
+Residual vs. fitted plots are typically used to assess whether the assumption of homoskedasticity, or constant variance, has been met.  If this is the case, then the points in the graph should occupy a fairly uniform horizontal band centered vertically at 0.  By contrast a change in width (a fan shape, for example) or a visible pattern would indicate a violation of this assumption.  In the left of this plot the spread of the residuals is wider than in the center or right.  While this indicates a possible issue with the fit, overall these results indicate that the assumption of homoskedasticity has not been violated to a large enough degree to justify major concern.
 
 
 8) Run the following code so I can see what version of R you are using:
