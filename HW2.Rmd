@@ -9,7 +9,8 @@ date: "Due Friday 9/9 at 6 PM"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, show.signif.stars=FALSE)
+
 require(pander)
 require(zoo)
 require(dplyr)
@@ -48,7 +49,7 @@ scatterplot(MMXT~FYEAR|MONTH,data=bozetmp,legend.plot=T,smoother=F)
 4) Explore the same research question as in #3 by fitting a model with a `Year` by `Month` interaction (include main `effects` too). Generate and report an F-test for the interaction in the model using either `anova` or `Anova` from the `car` package. Write out a one-sentence conclusion that summarizes the results of the test including information on the distribution of the test statistic under the null hypothesis in that sentence.
 
 ```{r p4, echo=F, comment=NA, message=F, warning=F, cache=T}
-bzt.fit2 <- lm(MMXT~ FYEAR + MONTH : YEAR:MONTH, data=bozetmp)
+bzt.fit2 <- lm(MMXT~ FYEAR + MONTH + FYEAR:MONTH, data=bozetmp)
 
 pander(anova(bzt.fit2))
 ```
@@ -70,13 +71,14 @@ confint(Tukey_results)
 6) One other issue that wasn't obvious in either the initial plots or in the model diagnostics is whether the linear trend really is a good description of the changes over time. There are a couple of ways to add polynomial terms to linear models. The simplest is just to create a squared version of the variable and include it as an additional variable. We'll see that this isn't an optimal choice in the next homework, but let's start this way for now. Once you are considering incorporating polynomials, we need to consider some sort of model refinement to decide on the polynomial order (linear, quadratic, cubic, quartic, etc.) to use. One technique is to sequentially add higher order versions of the variable to the lower order (linear, quadratic, etc.) versions of it and stop when the highest order term has a "large p-value" and drop back to the next lower order model that has the highest order term having a small p-value (checking diagnostics to make sure nothing really high order was missed). Employ this approach, starting with adding a quadratic `Year` variable to the `Year+Month` model. Report the test for the quadratic component (with distribution, test statistic, and p-value) and interpret this result, remembering that t-tests are conditional on other stuff in the model. 
 
 ```{r p6, echo=F, comment=NA, message=F, warning=F, cache=T}
-bzt.fit3 <- lm(MMXT~ FYEAR + MONTH + I(YEAR^2), data=bozetmp)
+bzt.fit3 <- lm(MMXT~ FYEAR + MONTH + I(FYEAR^2), data=bozetmp)
 pander(bzt.fit3)
 ```
 
 7) For the model with the linear and quadratic `Year` components and an additive `Month`, produce the 2x2 diagnostic plots from `plot(model)` as in HW 1. This time, discuss the top left panel (`Residuals vs Fitted`). Discuss what you can generally assess in this plot and then discuss the specific results for this model. 
 
 ```{r p7, echo=F, comment=NA, message=F, warning=F, cache=T}
+par(mfrow=c(2,2))
 plot(bzt.fit3)
 ```
 
