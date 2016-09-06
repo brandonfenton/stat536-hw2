@@ -46,13 +46,18 @@ scatterplot(MMXT~YEAR|MONTH,data=bozetmp,legend.plot=T,smoother=F)
 
 5) Return to the additive model (`Year+Month`) and let's consider the potential evidence for specific differences in the pairs of months. We can test the 12 choose 2 comparisons, maintaining overall or "family-wise" error rates of, say, 5% by using Tukey's Honest Significant Difference. This is a little more complicated to use than in a simpler One-Way ANOVA model because we need to adjust for the linear trend. But the method is easily extended to handle more complicated models and those with multiple predictors using the same code you can use in the One-Way ANOVA case (See Greenwood and Banner (2016) Section 2.5 and 2.6 (https://scholarworks.montana.edu/xmlui/handle/1/2999) for more on this method in the simpler scenario). Your code will be something like the following, after you install the `multcomp` package. Note that you may need to modify the model name (`model1` below) and the variable to perform Tukey's HSD on (`Monthf` below).
 
-`require(multcomp)`
+```{r p5, echo=F, comment=NA, message=F, warning=F, cache=T}
 
-`Tukey_results<-glht(model1,linfct=mcp(Monthf="Tukey"))`
 
-`summary(Tukey_results)`
+require(multcomp)
 
-`confint(Tukey_results)`
+Tukey_results<-glht(model1,linfct=mcp(Monthf="Tukey"))
+
+summary(Tukey_results)
+
+confint(Tukey_results)
+```
+
 
   You can also plot the results but with so many comparisons, the plot is not very useful. Based on these results, what can you say about evidence for differences in the months after controlling for the linear year trend? A fairly simple pattern should arise in the results. I find it useful to switch to saying differences were or were not "detected" when dealing with a large suite of Tukey's results. 
 
