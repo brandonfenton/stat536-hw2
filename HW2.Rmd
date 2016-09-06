@@ -114,8 +114,33 @@ getRversion()
 
 ## R Code Appendix:
 
+Problem 1:
+```{r a1, ref.label='p1', eval=F}
+
+```
+
 Problem 3:
 ```{r a3, ref.label='p3', eval=F}
+
+```
+
+Problem 4:
+```{r a4, ref.label='p4', eval=F}
+
+```
+
+Problem 5:
+```{r a5, ref.label='p5', eval=F}
+
+```
+
+Problem 6:
+```{r a6, ref.label='p6', eval=F}
+
+```
+
+Problem 7:
+```{r a7, ref.label='p7', eval=F}
 
 ```
 
