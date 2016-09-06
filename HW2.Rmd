@@ -26,7 +26,7 @@ Either use my code or your code to generate a `Year` variable that includes the 
 
 
 1) _Re-estimate and then use the output to write out the estimated model that incorporates the linear time trend and the month component from HW 1. Use indicator/dummy variable notation and define all model aspects._
-```{r p1, echo=F, comment=NA, message=F, warning=F, cache=T}
+    ```{r p1, echo=F, comment=NA, message=F, warning=F, cache=T}
 bozetmp$DATE <- as.yearmon(as.character(bozetmp$DATE), "%Y%m")
 
 bozetmp$MONTH <- as.POSIXlt(bozetmp$DATE)$mon
@@ -53,10 +53,10 @@ where MONTH1 is February, MONTH2 is March, and so on, as January is considered t
 
 2) _What is the model for an observation in a January? July? Simplify the full model for each specific month to just provide a function of `Year`._
 
-The model for January is $\widehat{MMXT}_t = `r coef(bzt.fit)["(Intercept)"]` + `r coef(bzt.fit)["FYEAR"]` \times Year_t$.
+    The model for January is $\widehat{MMXT}_t = `r coef(bzt.fit)["(Intercept)"]` + `r coef(bzt.fit)["FYEAR"]` \times Year_t$.
 
 
-The model for July is $\widehat{MMXT}_t = `r coef(bzt.fit)["(Intercept)"]` + `r coef(bzt.fit)["MONTH6"]` + `r coef(bzt.fit)["FYEAR"]` \times Year_t$.
+    The model for July is $\widehat{MMXT}_t = `r coef(bzt.fit)["(Intercept)"]` + `r coef(bzt.fit)["MONTH6"]` + `r coef(bzt.fit)["FYEAR"]` \times Year_t$.
 
 3) _Has the mean temperature changed differently in different months? Load the `car` package and make a plot using something like `scatterplot(MMXT~Year|Month,data=rawd1,legend.plot=T,smoother=F)`. Discuss the results in the plot._
 
