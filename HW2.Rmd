@@ -22,7 +22,10 @@ Either use my code or your code to generate a `Year` variable that includes the 
 
 1) Re-estimate and then use the output to write out the estimated model that incorporates the linear time trend and the month component from HW 1. Use indicator/dummy variable notation and define all model aspects.
 ```{r p1, echo=F, comment=NA, message=F, warning=F, cache=T}
-
+bozetmp$DATE <- as.yearmon(as.character(bozetmp$DATE), "%Y%m")
+bozetmp$FYEAR <- paste(as.POSIXlt(bozetmp$DATE)$year + 1900, "+", as.POSIXlt(bozetmp$DATE)$mon, "/12", sep="")
+bozetmp$MONTH <- as.POSIXlt(bozetmp$DATE)$mon + 1
+bozetmp$YEAR <- as.POSIXlt(bozetmp$DATE)$year + 1900
 
 ```
 
@@ -31,7 +34,7 @@ Either use my code or your code to generate a `Year` variable that includes the 
 3) Has the mean temperature changed differently in different months? Load the `car` package and make a plot using something like `scatterplot(MMXT~Year|Month,data=rawd1,legend.plot=T,smoother=F)`. Discuss the results in the plot.
 
 ```{r p3, echo=F, comment=NA, message=F, warning=F, cache=T}
-
+scatterplot(MMXT~YEAR|MONTH,data=bozetmp,legend.plot=T,smoother=F)
 ```
 
 4) Explore the same research question as in #3 by fitting a model with a `Year` by `Month` interaction (include main `effects` too). Generate and report an F-test for the interaction in the model using either `anova` or `Anova` from the `car` package. Write out a one-sentence conclusion that summarizes the results of the test including information on the distribution of the test statistic under the null hypothesis in that sentence.
