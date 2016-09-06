@@ -2,7 +2,7 @@
 word_document:
   fig_height: 7
   fig_width: 10
-author: "Brandon Fenton and "
+author: "Brandon Fenton and Kenneth Flagg"
 output: pdf_document
 title: "Time Series HW 2"
 date: "Due Friday 9/9 at 6 PM"
@@ -30,6 +30,11 @@ bozetmp$YEAR <- as.POSIXlt(bozetmp$DATE)$year + 1900
 
 bozetmp$FYEAR <- paste(bozetmp$YEAR + 1900, "+", bozetmp$MONTH, "/12", sep="")
 
+bozetmp$MONTH <- as.factor(bozetmp$MONTH)
+
+bzt.fit <- lm(MMXT~ YEAR + MONTH, data=bozetmp)
+
+pander(bzt.fit, move.intercept=FALSE)
 ```
 
 2) What is the model for an observation in a January? July? Simplify the full model for each specific month to just provide a function of `Year`. 
@@ -43,7 +48,9 @@ scatterplot(MMXT~YEAR|MONTH,data=bozetmp,legend.plot=T,smoother=F)
 4) Explore the same research question as in #3 by fitting a model with a `Year` by `Month` interaction (include main `effects` too). Generate and report an F-test for the interaction in the model using either `anova` or `Anova` from the `car` package. Write out a one-sentence conclusion that summarizes the results of the test including information on the distribution of the test statistic under the null hypothesis in that sentence.
 
 ```{r p4, echo=F, comment=NA, message=F, warning=F, cache=T}
+bzt.fit2 <- lm(MMXT~ YEAR + MONTH : YEAR:MONTH, data=bozetmp)
 
+pander(anova(bzt.fit2))
 ```
 
 5) Return to the additive model (`Year+Month`) and let's consider the potential evidence for specific differences in the pairs of months. We can test the 12 choose 2 comparisons, maintaining overall or "family-wise" error rates of, say, 5% by using Tukey's Honest Significant Difference. This is a little more complicated to use than in a simpler One-Way ANOVA model because we need to adjust for the linear trend. But the method is easily extended to handle more complicated models and those with multiple predictors using the same code you can use in the One-Way ANOVA case (See Greenwood and Banner (2016) Section 2.5 and 2.6 (https://scholarworks.montana.edu/xmlui/handle/1/2999) for more on this method in the simpler scenario). Your code will be something like the following, after you install the `multcomp` package. Note that you may need to modify the model name (`model1` below) and the variable to perform Tukey's HSD on (`Monthf` below).
@@ -52,7 +59,7 @@ scatterplot(MMXT~YEAR|MONTH,data=bozetmp,legend.plot=T,smoother=F)
 
 require(multcomp)
 
-Tukey_results<-glht(model1,linfct=mcp(Monthf="Tukey"))
+Tukey_results<-glht(bzt.fit,linfct=mcp(MONTH="Tukey"))
 
 summary(Tukey_results)
 
@@ -65,7 +72,8 @@ confint(Tukey_results)
 6) One other issue that wasn't obvious in either the initial plots or in the model diagnostics is whether the linear trend really is a good description of the changes over time. There are a couple of ways to add polynomial terms to linear models. The simplest is just to create a squared version of the variable and include it as an additional variable. We'll see that this isn't an optimal choice in the next homework, but let's start this way for now. Once you are considering incorporating polynomials, we need to consider some sort of model refinement to decide on the polynomial order (linear, quadratic, cubic, quartic, etc.) to use. One technique is to sequentially add higher order versions of the variable to the lower order (linear, quadratic, etc.) versions of it and stop when the highest order term has a "large p-value" and drop back to the next lower order model that has the highest order term having a small p-value (checking diagnostics to make sure nothing really high order was missed). Employ this approach, starting with adding a quadratic `Year` variable to the `Year+Month` model. Report the test for the quadratic component (with distribution, test statistic, and p-value) and interpret this result, remembering that t-tests are conditional on other stuff in the model. 
 
 ```{r p6, echo=F, comment=NA, message=F, warning=F, cache=T}
-
+bzt.fit3 <- lm(MMXT~ YEAR + MONTH + YEAR^2, data=bozetmp)
+pander(bzt.fit3)
 ```
 
 7) For the model with the linear and quadratic `Year` components and an additive `Month`, produce the 2x2 diagnostic plots from `plot(model)` as in HW 1. This time, discuss the top left panel (`Residuals vs Fitted`). Discuss what you can generally assess in this plot and then discuss the specific results for this model. 
