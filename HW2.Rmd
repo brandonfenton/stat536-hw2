@@ -85,7 +85,7 @@ getRversion()
 ## R Code Appendix:
 
 Problem 3:
-```{r a3, ref.label='p4_b', eval=F}
+```{r a3, ref.label='p3', eval=F}
 
 ```
 
