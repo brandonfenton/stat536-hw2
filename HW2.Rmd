@@ -28,7 +28,7 @@ bozetmp$DATE <- as.yearmon(as.character(bozetmp$DATE), "%Y%m")
 bozetmp$MONTH <- as.POSIXlt(bozetmp$DATE)$mon + 1
 bozetmp$YEAR <- as.POSIXlt(bozetmp$DATE)$year + 1900
 
-bozetmp$FYEAR <- paste(bozetmp$YEAR + 1900, "+", bozetmp$MONTH, "/12", sep="")
+bozetmp$FYEAR <- bozetmp$YEAR + bozetmp$MONTH/12
 
 bozetmp$MONTH <- as.factor(bozetmp$MONTH)
 
