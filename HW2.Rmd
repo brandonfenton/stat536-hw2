@@ -24,9 +24,11 @@ Either use my code or your code to generate a `Year` variable that includes the 
 1) Re-estimate and then use the output to write out the estimated model that incorporates the linear time trend and the month component from HW 1. Use indicator/dummy variable notation and define all model aspects.
 ```{r p1, echo=F, comment=NA, message=F, warning=F, cache=T}
 bozetmp$DATE <- as.yearmon(as.character(bozetmp$DATE), "%Y%m")
-bozetmp$FYEAR <- paste(as.POSIXlt(bozetmp$DATE)$year + 1900, "+", as.POSIXlt(bozetmp$DATE)$mon, "/12", sep="")
+
 bozetmp$MONTH <- as.POSIXlt(bozetmp$DATE)$mon + 1
 bozetmp$YEAR <- as.POSIXlt(bozetmp$DATE)$year + 1900
+
+bozetmp$FYEAR <- paste(bozetmp$YEAR + 1900, "+", bozetmp$MONTH, "/12", sep="")
 
 ```
 
@@ -47,7 +49,6 @@ scatterplot(MMXT~YEAR|MONTH,data=bozetmp,legend.plot=T,smoother=F)
 5) Return to the additive model (`Year+Month`) and let's consider the potential evidence for specific differences in the pairs of months. We can test the 12 choose 2 comparisons, maintaining overall or "family-wise" error rates of, say, 5% by using Tukey's Honest Significant Difference. This is a little more complicated to use than in a simpler One-Way ANOVA model because we need to adjust for the linear trend. But the method is easily extended to handle more complicated models and those with multiple predictors using the same code you can use in the One-Way ANOVA case (See Greenwood and Banner (2016) Section 2.5 and 2.6 (https://scholarworks.montana.edu/xmlui/handle/1/2999) for more on this method in the simpler scenario). Your code will be something like the following, after you install the `multcomp` package. Note that you may need to modify the model name (`model1` below) and the variable to perform Tukey's HSD on (`Monthf` below).
 
 ```{r p5, echo=F, comment=NA, message=F, warning=F, cache=T}
-
 
 require(multcomp)
 
