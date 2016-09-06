@@ -45,6 +45,11 @@ pander(bzt.fit)
 
 ```
 
+Where 
+
+$\widehat{MMXT}=-69.29+0.05167*\widehat{FYEAR}+3.7014*\widehat{MONTH1}+11.189*\widehat{MONTH2}+21.977*\widehat{MONTH3}+31.224*\widehat{MONTH4}+39.708*\widehat{MONTH5}+49.565*\widehat{MONTH6}+48.466*\widehat{MONTH7}+37.629*\widehat{MONTH8}+25.822*\widehat{MONTH9}+10.315*\widehat{MONTH}+1.7329*\widehat{MONTH11}$  
+where
+
 2) What is the model for an observation in a January? July? Simplify the full model for each specific month to just provide a function of `Year`. 
 
 3) Has the mean temperature changed differently in different months? Load the `car` package and make a plot using something like `scatterplot(MMXT~Year|Month,data=rawd1,legend.plot=T,smoother=F)`. Discuss the results in the plot.
