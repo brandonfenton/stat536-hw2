@@ -43,10 +43,11 @@ pander(bzt.fit)
 ```
 
 
-Where 
+After re-estimating the model with fraction year data, the following model is obtained:
 
-$\widehat{MMXT}=-69.29+0.05167*\widehat{FYEAR}+3.7014*\widehat{MONTH1}+11.189*\widehat{MONTH2}+21.977*\widehat{MONTH3}+31.224*\widehat{MONTH4}+39.708*\widehat{MONTH5}+49.565*\widehat{MONTH6}+48.466*\widehat{MONTH7}+37.629*\widehat{MONTH8}+25.822*\widehat{MONTH9}+10.315*\widehat{MONTH}+1.7329*\widehat{MONTH11}$  
-where
+$\widehat{MMXT}=-69.29+0.05167*\widehat{FYEAR}+3.7014*\widehat{MONTH1}+11.189*\widehat{MONTH2}+21.977*\widehat{MONTH3}+31.224*\widehat{MONTH4}+39.708*\widehat{MONTH5}+49.565*\widehat{MONTH6}+48.466*\widehat{MONTH7}+37.629*\widehat{MONTH8}+25.822*\widehat{MONTH9}+10.315*\widehat{MONTH}+1.7329*\widehat{MONTH11}$
+
+where MONTH1 is February, MONTH2 is March, and so on, as January is considered to be our baseline month.
 
 
 
