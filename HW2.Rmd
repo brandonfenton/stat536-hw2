@@ -64,6 +64,8 @@ The model for July is $\widehat{MMXT}_t = `r coef(bzt.fit)["(Intercept)"]` + `r 
 scatterplot(MMXT~FYEAR|MONTH,data=bozetmp,legend.plot=T,smoother=F)
 ```
 
+The scatterplot above shows the change in maximum monthly temperature over time for each month. Comparing the line of best fit for each month, it can be noted that the change in temperature appears to be very similar over time. We can see a slight positive linear trend in the data for each month, and the slopes appear to be very similar for each month, indicating that the mean temperature change is not different in different months.
+
 4) _Explore the same research question as in #3 by fitting a model with a `Year` by `Month` interaction (include main `effects` too). Generate and report an F-test for the interaction in the model using either `anova` or `Anova` from the `car` package. Write out a one-sentence conclusion that summarizes the results of the test including information on the distribution of the test statistic under the null hypothesis in that sentence._
 
 ```{r p4, echo=F, comment=NA, message=F, warning=F, cache=T}
