@@ -1,1 +1,3 @@
-# stat536-hw2
+# Time Series Homework 2
+
+## Featuring Brandon, Kenny, and Justin

@@ -2,7 +2,7 @@
 word_document:
   fig_height: 7
   fig_width: 10
-author: "Brandon Fenton and Kenneth Flagg"
+author: "Brandon Fenton, Kenneth Flagg, and Justin Gomez"
 output: pdf_document
 title: "Time Series HW 2"
 date: "Due Friday 9/9 at 6 PM"
