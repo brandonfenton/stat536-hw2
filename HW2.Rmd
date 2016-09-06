@@ -1,11 +1,8 @@
 ---
-word_document:
-  fig_height: 7
-  fig_width: 10
 author: "Brandon Fenton, Kenneth Flagg, and Justin Gomez"
-output: pdf_document
 title: "Time Series HW 2"
 date: "Due Friday 9/9 at 6 PM"
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -38,7 +35,11 @@ bzt.fit <- lm(MMXT~ FYEAR + MONTH, data=bozetmp)
 pander(bzt.fit, move.intercept=FALSE)
 ```
 
-2) What is the model for an observation in a January? July? Simplify the full model for each specific month to just provide a function of `Year`. 
+2) _What is the model for an observation in a January? July? Simplify the full model for each specific month to just provide a function of `Year`._
+
+The model for January is $\widehat{MMXT}_t = `r coef(bzt.fit)["(Intercept)"]` + `r coef(bzt.fit)["FYEAR"]` \times Year_t$.
+
+The model for July is $\widehat{MMXT}_t = `r coef(bzt.fit)["(Intercept)"]` + `r coef(bzt.fit)["MONTH6"]` + `r coef(bzt.fit)["FYEAR"]` \times Year_t$.
 
 3) Has the mean temperature changed differently in different months? Load the `car` package and make a plot using something like `scatterplot(MMXT~Year|Month,data=rawd1,legend.plot=T,smoother=F)`. Discuss the results in the plot.
 
