@@ -90,6 +90,8 @@ pander(bzt.fit3)
 ```{r p7, echo=F, comment=NA, message=F, warning=F, cache=T}
 par(mfrow=c(2,2))
 plot(bzt.fit3)
+
+bzt.fit4 <- lm(MMXT~ FYEAR + MONTH + I(FYEAR^2) + I(FYEAR^3), data=bozetmp)
 ```
 
 
