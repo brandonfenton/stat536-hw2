@@ -43,10 +43,11 @@ pander(bzt.fit)
 ```
 
 
-Where 
+After re-estimating the model with fraction year data, the following model is obtained:
 
-$\widehat{MMXT}=-69.29+0.05167*\widehat{FYEAR}+3.7014*\widehat{MONTH1}+11.189*\widehat{MONTH2}+21.977*\widehat{MONTH3}+31.224*\widehat{MONTH4}+39.708*\widehat{MONTH5}+49.565*\widehat{MONTH6}+48.466*\widehat{MONTH7}+37.629*\widehat{MONTH8}+25.822*\widehat{MONTH9}+10.315*\widehat{MONTH}+1.7329*\widehat{MONTH11}$  
-where
+$\widehat{MMXT}=-69.29+0.05167*\widehat{FYEAR}+3.7014*\widehat{MONTH1}+11.189*\widehat{MONTH2}+21.977*\widehat{MONTH3}+31.224*\widehat{MONTH4}+39.708*\widehat{MONTH5}+49.565*\widehat{MONTH6}+48.466*\widehat{MONTH7}+37.629*\widehat{MONTH8}+25.822*\widehat{MONTH9}+10.315*\widehat{MONTH}+1.7329*\widehat{MONTH11}$
+
+where MONTH1 is February, MONTH2 is March, and so on, as January is considered to be our baseline month.
 
 
 
@@ -75,7 +76,7 @@ With $F_{`r cat(anova(bzt.fit2)["FYEAR:MONTH", "Df"])` ,\; `cat(anova(bzt.fit2)[
 
 5) _Return to the additive model (`Year+Month`) and let's consider the potential evidence for specific differences in the pairs of months. We can test the 12 choose 2 comparisons, maintaining overall or "family-wise" error rates of, say, 5% by using Tukey's Honest Significant Difference. This is a little more complicated to use than in a simpler One-Way ANOVA model because we need to adjust for the linear trend. But the method is easily extended to handle more complicated models and those with multiple predictors using the same code you can use in the One-Way ANOVA case (See Greenwood and Banner (2016) Section 2.5 and 2.6 (https://scholarworks.montana.edu/xmlui/handle/1/2999) for more on this method in the simpler scenario). Your code will be something like the following, after you install the `multcomp` package. Note that you may need to modify the model name (`model1` below) and the variable to perform Tukey's HSD on (`Monthf` below)._
 
-```{r p5, echo=F, comment=NA, message=F, warning=F, cache=T}
+    ```{r p5, echo=F, comment=NA, message=F, warning=F, cache=T}
 
 require(multcomp)
 
@@ -88,8 +89,8 @@ Tukey_results<-glht(model = bzt.fit, linfct=mcp(MONTH="Tukey"))
 confint(Tukey_results)
 ```
 
-  You can also plot the results but with so many comparisons, the plot is not very useful. Based on these results, what can you say about evidence for differences in the months after controlling for the linear year trend? A fairly simple pattern should arise in the results. I find it useful to switch to saying differences were or were not "detected" when dealing with a large suite of Tukey's results. 
-
+    You can also plot the results but with so many comparisons, the plot is not very useful. Based on these results, what can you say about evidence for differences in the months after controlling for the linear year trend? A fairly simple pattern should arise in the results. I find it useful to switch to saying differences were or were not "detected" when dealing with a large suite of Tukey's results. 
+  
 6) _One other issue that wasn't obvious in either the initial plots or in the model diagnostics is whether the linear trend really is a good description of the changes over time. There are a couple of ways to add polynomial terms to linear models. The simplest is just to create a squared version of the variable and include it as an additional variable. We'll see that this isn't an optimal choice in the next homework, but let's start this way for now. Once you are considering incorporating polynomials, we need to consider some sort of model refinement to decide on the polynomial order (linear, quadratic, cubic, quartic, etc.) to use. One technique is to sequentially add higher order versions of the variable to the lower order (linear, quadratic, etc.) versions of it and stop when the highest order term has a "large p-value" and drop back to the next lower order model that has the highest order term having a small p-value (checking diagnostics to make sure nothing really high order was missed). Employ this approach, starting with adding a quadratic `Year` variable to the `Year+Month` model. Report the test for the quadratic component (with distribution, test statistic, and p-value) and interpret this result, remembering that t-tests are conditional on other stuff in the model._ 
 
 ```{r p6, echo=F, comment=NA, message=F, warning=F, cache=T}
@@ -99,11 +100,11 @@ pander(bzt.fit3)
 
 7) _For the model with the linear and quadratic `Year` components and an additive `Month`, produce the 2x2 diagnostic plots from `plot(model)` as in HW 1. This time, discuss the top left panel (`Residuals vs Fitted`). Discuss what you can generally assess in this plot and then discuss the specific results for this model._ 
 
-```{r p7, echo=F, comment=NA, message=F, warning=F, cache=T}
+    ```{r p7, echo=F, comment=NA, message=F, warning=F, cache=T}
 par(mfrow=c(2,2))
 plot(bzt.fit3)
 ```
-Residual vs. fitted plots are typically used to assess whether the assumption of homoskedasticity, or constant variance, has been met.  If this is the case, then the points in the graph should occupy a fairly uniform horizontal band centered vertically at 0.  By contrast a change in width (a fan shape, for example) or a visible pattern would indicate a violation of this assumption.  In the left of this plot the spread of the residuals is wider than in the center or right.  While this indicates a possible issue with the fit, overall these results indicate that the assumption of homoskedasticity has not been violated to a large enough degree to justify major concern.
+    Residual vs. fitted plots are typically used to assess whether the assumption of homoskedasticity, or constant variance, has been met.  If this is the case, then the points in the graph should occupy a fairly uniform horizontal band centered vertically at 0.  By contrast a change in width (a fan shape, for example) or a visible pattern would indicate a violation of this assumption.  In the left of this plot the spread of the residuals is wider than in the center or right.  While this indicates a possible issue with the fit, overall these results indicate that the assumption of homoskedasticity has not been violated to a large enough degree to justify major concern.
 
 
 8) _Run the following code so I can see what version of R you are using:_
@@ -116,8 +117,33 @@ getRversion()
 
 ## R Code Appendix:
 
+Problem 1:
+```{r a1, ref.label='p1', eval=F}
+
+```
+
 Problem 3:
 ```{r a3, ref.label='p3', eval=F}
+
+```
+
+Problem 4:
+```{r a4, ref.label='p4', eval=F}
+
+```
+
+Problem 5:
+```{r a5, ref.label='p5', eval=F}
+
+```
+
+Problem 6:
+```{r a6, ref.label='p6', eval=F}
+
+```
+
+Problem 7:
+```{r a7, ref.label='p7', eval=F}
 
 ```
 
