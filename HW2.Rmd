@@ -50,11 +50,19 @@ pander(bzt.fit.ttable, caption = "Linear model coefficient estimates")
 ```
 
 
+<<<<<<< HEAD
 After re-estimating the model with fraction year data, the following model is obtained:
   
   $\widehat{MMXT}=-69.29+0.05167*\widehat{FYEAR}+3.7014*\widehat{MONTH1}+11.189*\widehat{MONTH2}+21.977*\widehat{MONTH3}+31.224*\widehat{MONTH4}+39.708*\widehat{MONTH5}+49.565*\widehat{MONTH6}+48.466*\widehat{MONTH7}+37.629*\widehat{MONTH8}+25.822*\widehat{MONTH9}+10.315*\widehat{MONTH10}+1.7329*\widehat{MONTH11}$
   
   where MONTH1 is February, MONTH2 is March, and so on, as January is considered to be our baseline month.
+=======
+    After re-estimating the model with fraction year data, the following model is obtained:
+
+    $\widehat{MMXT}=-69.29+0.05167*\widehat{FYEAR}+3.7014*\widehat{MONTH1}+11.189*\widehat{MONTH2}+21.977*\widehat{MONTH3}+31.224*\widehat{MONTH4}+39.708*\widehat{MONTH5}+49.565*\widehat{MONTH6}+48.466*\widehat{MONTH7}+37.629*\widehat{MONTH8}+25.822*\widehat{MONTH9}+10.315*\widehat{MONTH}+1.7329*\widehat{MONTH11}$
+
+    where MONTH1 is February, MONTH2 is March, and so on, as January is considered to be our baseline month.
+>>>>>>> parent of dd5b3fe... Hats off
 
 
 
@@ -97,7 +105,11 @@ Tukey_results$confint <- confint(Tukey_results)$confint
 emphasize.strong.rows(which(Tukey_results$confint[,2] < 0 & 
 Tukey_results$confint[,3] >0))
 
+<<<<<<< HEAD
 pander(Tukey_results$confint)
+=======
+pander(Tukey_results$confint, caption = "Tukey comparisons of month effects (95% familywise confidence level)")
+>>>>>>> parent of dd5b3fe... Hats off
 
 # confint(Tukey_results)
 ```
