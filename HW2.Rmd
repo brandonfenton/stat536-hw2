@@ -14,6 +14,7 @@ require(pander)
 panderOptions('round', 5)
 panderOptions('digits', 5)
 panderOptions('keep.trailing.zeros', TRUE)
+panderOptions('missing', "-")
 
 require(zoo)
 require(dplyr)
