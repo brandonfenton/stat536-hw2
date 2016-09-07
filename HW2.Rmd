@@ -15,6 +15,7 @@ require(pander)
 panderOptions('digits', 5)
 panderOptions('keep.trailing.zeros', TRUE)
 panderOptions('missing', "-")
+panderOptions('table.alignment.default', "right")
 
 require(zoo)
 require(dplyr)
