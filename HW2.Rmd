@@ -23,8 +23,6 @@ require(multcomp)
 bozetmp <- read.csv("rawbozemandata.csv")
 ```
 
-Either use my code or your code to generate a `Year` variable that includes the fractional information on the month. For example, January would be 1900+0/12 and December would be 1900+11/12 in the `Year` variable.
-
 
 1) _Re-estimate and then use the output to write out the estimated model that incorporates the linear time trend and the month component from HW 1. Use indicator/dummy variable notation and define all model aspects._
     ```{r p1, echo=F, comment=NA, message=F, warning=F}
