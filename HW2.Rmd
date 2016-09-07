@@ -52,7 +52,7 @@ pander(bzt.fit.ttable, caption = "Linear model coefficient estimates")
 
     After re-estimating the model with fraction year data, the following model is obtained:
 
-    $\widehat{MMXT}=-69.29+0.05167*\widehat{FYEAR}+3.7014*\widehat{MONTH1}+11.189*\widehat{MONTH2}+21.977*\widehat{MONTH3}+31.224*\widehat{MONTH4}+39.708*\widehat{MONTH5}+49.565*\widehat{MONTH6}+48.466*\widehat{MONTH7}+37.629*\widehat{MONTH8}+25.822*\widehat{MONTH9}+10.315*\widehat{MONTH}+1.7329*\widehat{MONTH11}$
+    $\widehat{MMXT}=-69.29+0.05167*FYEAR+3.7014*MONTH1+11.189*MONTH2+21.977*MONTH3+31.224*MONTH4+39.708*MONTH5+49.565*MONTH6+48.466*MONTH7+37.629*MONTH8+25.822*MONTH9+10.315*MONTH+1.7329*MONTH11$
 
     where MONTH1 is February, MONTH2 is March, and so on, as January is considered to be our baseline month.
 
@@ -90,14 +90,13 @@ pander(anova(bzt.fit2))
 
 require(multcomp)
 
-
 Tukey_results<-glht(model = bzt.fit, linfct=mcp(MONTH="Tukey"))
 Tukey_results$confint <- confint(Tukey_results)$confint
 
 emphasize.strong.rows(which(Tukey_results$confint[,2] < 0 & 
                              Tukey_results$confint[,3] >0))
 
-pander(Tukey_results$confint, caption = "Tukey comparisons of month effects (95% familywise confidence level)")
+pander(Tukey_results$confint, caption = "Tukey pairwise comparisons of month effects")
 
 # confint(Tukey_results)
 ```
