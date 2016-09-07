@@ -6,7 +6,8 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, show.signif.stars=FALSE)
+knitr::opts_chunk$set(echo = TRUE, show.signif.stars=FALSE,
+                      dev.args = list(pointsize = 8))
 
 require(pander)
 
@@ -38,7 +39,13 @@ bozetmp$MONTH <- as.factor(bozetmp$MONTH)
 
 bzt.fit <- lm(MMXT~ FYEAR + MONTH, data=bozetmp)
 
-pander(bzt.fit)
+bzt.fit.ttable <- summary(bzt.fit)$coefficients
+lmtable.colnames <- colnames(bzt.fit.ttable)
+bzt.fit.ttable <- as.data.frame(bzt.fit.ttable)
+bzt.fit.ttable$`Pr(>|t|)` <- ifelse(bzt.fit.ttable$`Pr(>|t|)` < 0.0001, "< 0.0001",
+                                    sprintf("%.4f", bzt.fit.ttable$`Pr(>|t|)`))
+
+pander(bzt.fit.ttable, caption = "Linear model coefficient estimates")
 
 ```
 
