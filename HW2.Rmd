@@ -84,9 +84,9 @@ require(multcomp)
 
 
 Tukey_results<-glht(model = bzt.fit, linfct=mcp(MONTH="Tukey"))
+Tukey_results$confint <- confint(Tukey_results)
 
-
-# pander(confint(Tukey_results)$confint)
+pander(Tukey_results$confint)
 
 confint(Tukey_results)
 ```
