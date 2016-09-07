@@ -97,7 +97,7 @@ Tukey_results$confint <- confint(Tukey_results)$confint
 emphasize.strong.rows(which(Tukey_results$confint[,2] < 0 & 
                              Tukey_results$confint[,3] >0))
 
-pander(Tukey_results$confint)
+pander(Tukey_results$confint, caption = "Tukey comparisons of month effects (95% familywise confidence level)")
 
 # confint(Tukey_results)
 ```
