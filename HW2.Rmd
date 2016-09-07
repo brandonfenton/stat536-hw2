@@ -84,11 +84,14 @@ require(multcomp)
 
 
 Tukey_results<-glht(model = bzt.fit, linfct=mcp(MONTH="Tukey"))
-Tukey_results$confint <- confint(Tukey_results)
+Tukey_results$confint <- confint(Tukey_results)$confint
+
+emphasize.strong.rows(which(Tukey_results$confint[,2] < 0 & 
+                             Tukey_results$confint[,3] >0))
 
 pander(Tukey_results$confint)
 
-confint(Tukey_results)
+# confint(Tukey_results)
 ```
 
     You can also plot the results but with so many comparisons, the plot is not very useful. Based on these results, what can you say about evidence for differences in the months after controlling for the linear year trend? A fairly simple pattern should arise in the results. I find it useful to switch to saying differences were or were not "detected" when dealing with a large suite of Tukey's results. 
