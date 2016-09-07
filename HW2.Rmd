@@ -51,7 +51,7 @@ pander(bzt.fit.ttable, caption = "Linear model coefficient estimates")
   
     After re-estimating the model with fraction year data, the following model is obtained:
 
-    $\widehat{MMXT}=-69.29+0.05167*FYEAR+3.7014*MONTH1+11.189*MONTH2+21.977*MONTH3+31.224*MONTH4+39.708*MONTH5+49.565*MONTH6+48.466*MONTH7+37.629*MONTH8+25.822*MONTH9+10.315*MONTH+1.7329*MONTH11$
+    $\widehat{MMXT}=-69.29+0.05167 \times FYEAR+3.7014 \times MONTH1+11.189 \times MONTH2+21.977 \times MONTH3+31.224 \times MONTH4+39.708 \times MONTH5+49.565 \times MONTH6+48.466 \times MONTH7+37.629 \times MONTH8+25.822 \times MONTH9+10.315 \times MONTH10+1.7329 \times MONTH11$
   
     where MONTH1 is February, MONTH2 is March, and so on, as January is considered to be our baseline month.
 
