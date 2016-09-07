@@ -6,7 +6,8 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, show.signif.stars=FALSE)
+knitr::opts_chunk$set(echo = TRUE, show.signif.stars=FALSE,
+                      dev.args = list(pointsize = 8))
 
 require(pander)
 
