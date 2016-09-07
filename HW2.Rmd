@@ -27,7 +27,7 @@ Either use my code or your code to generate a `Year` variable that includes the 
 
 
 1) _Re-estimate and then use the output to write out the estimated model that incorporates the linear time trend and the month component from HW 1. Use indicator/dummy variable notation and define all model aspects._
-```{r p1, echo=F, comment=NA, message=F, warning=F}
+    ```{r p1, echo=F, comment=NA, message=F, warning=F}
 bozetmp$DATE <- as.yearmon(as.character(bozetmp$DATE), "%Y%m")
 
 bozetmp$MONTH <- as.POSIXlt(bozetmp$DATE)$mon
@@ -48,8 +48,7 @@ bzt.fit.ttable$`Pr(>|t|)` <- ifelse(bzt.fit.ttable$`Pr(>|t|)` < 0.0001, "< 0.000
 pander(bzt.fit.ttable, caption = "Linear model coefficient estimates")
 
 ```
-
-
+  
     After re-estimating the model with fraction year data, the following model is obtained:
 
     $\widehat{MMXT}=-69.29+0.05167*FYEAR+3.7014*MONTH1+11.189*MONTH2+21.977*MONTH3+31.224*MONTH4+39.708*MONTH5+49.565*MONTH6+48.466*MONTH7+37.629*MONTH8+25.822*MONTH9+10.315*MONTH+1.7329*MONTH11$
