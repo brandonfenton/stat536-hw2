@@ -85,7 +85,7 @@ pander(bzt.fit2.anova)
     With $F_{11,\; 1350} = 2.129$ (p-value = $0.01603$) there is strong evidence that at least one interaction term has a nonzero coefficient, after accounting for a linear trend across years and the month main effects.
 
 5) _Return to the additive model (`Year+Month`) and let's consider the potential evidence for specific differences in the pairs of months. We can test the 12 choose 2 comparisons, maintaining overall or "family-wise" error rates of, say, 5% by using Tukey's Honest Significant Difference. This is a little more complicated to use than in a simpler One-Way ANOVA model because we need to adjust for the linear trend. But the method is easily extended to handle more complicated models and those with multiple predictors using the same code you can use in the One-Way ANOVA case (See Greenwood and Banner (2016) Section 2.5 and 2.6 (https://scholarworks.montana.edu/xmlui/handle/1/2999) for more on this method in the simpler scenario). Your code will be something like the following, after you install the `multcomp` package. Note that you may need to modify the model name (`model1` below) and the variable to perform Tukey's HSD on (`Monthf` below)._
-6
+
     ```{r p5, echo=F, comment=NA, message=F, warning=F}
 
 require(multcomp)
