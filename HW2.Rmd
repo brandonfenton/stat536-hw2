@@ -75,8 +75,11 @@ scatterplot(MMXT~FYEAR|MONTH,data=bozetmp,legend.plot=T,smoother=F, pch=rep(20,1
 
     ```{r p4, echo=F, comment=NA, message=F, warning=F}
 bzt.fit2 <- lm(MMXT~ FYEAR + MONTH + FYEAR:MONTH, data=bozetmp)
+bzt.fit2.anova <- anova(bzt.fit2)
+bzt.fit2.anova$`Pr(>F)` <- ifelse(bzt.fit2.anova$`Pr(>F)` < 0.0001, "< 0.0001",
+                                  sprintf("%.4f", bzt.fit2.anova$`Pr(>F)`))
 
-pander(anova(bzt.fit2))
+pander(bzt.fit2.anova)
 ```
 
     With $F_{11,\; 1350} = 2.129$ (p-value = $0.01603$) there is strong evidence that at least one interaction term has a nonzero coefficient, after accounting for a linear trend across years and the month main effects.
