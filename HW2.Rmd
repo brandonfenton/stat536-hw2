@@ -113,6 +113,9 @@ pander(bzt.fit3)
 
     __TODO  "Report the test for the quadratic component (with distribution, test statistic, and p-value) and interpret this result, remembering that t-tests are conditional on other stuff in the model."__
 
+    The table above contains the model summary information for the components of the quadratic model. We can see that the quadratic term I(FYEAR^2) yields a t-statistic of -0.57614 on 1360 degrees of freedom with an associated p-value of 0.56462, a large enough value that we cannot conclude that the quadratic term contributes meaningfully to the fit when the other terms have been accounted for.
+  
+
 7) _For the model with the linear and quadratic `Year` components and an additive `Month`, produce the 2x2 diagnostic plots from `plot(model)` as in HW 1. This time, discuss the top left panel (`Residuals vs Fitted`). Discuss what you can generally assess in this plot and then discuss the specific results for this model._ 
 
     ```{r p7, echo=F, comment=NA, message=F, warning=F}
