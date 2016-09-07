@@ -106,7 +106,8 @@ pander(Tukey_results$confint, caption = "Tukey comparisons of month effects")
 
     ```{r p6, echo=F, comment=NA, message=F, warning=F}
 bzt.fit3 <- lm(MMXT~ FYEAR + MONTH + I(FYEAR^2), data=bozetmp)
-bzt.fit3.ttable <- as.data.frame(bzt.fit.ttable)
+bzt.fit3.ttable <- summary(bzt.fit3)$coefficients
+bzt.fit3.ttable <- as.data.frame(bzt.fit3.ttable)
 bzt.fit3.ttable$`Pr(>|t|)` <- ifelse(bzt.fit3.ttable$`Pr(>|t|)` < 0.0001, "< 0.0001",
                                     sprintf("%.4f", bzt.fit3.ttable$`Pr(>|t|)`))
 
